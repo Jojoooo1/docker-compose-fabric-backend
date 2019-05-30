@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  mongoBackend:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_DATA_DIR: /data/db
+      MONGO_LOG_DIR: /var/log/mongodb
+      # MONGO_INITDB_DATABASE: admin, config, local
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_USER: user
+      MONGO_PASSWORD: password
+      MONGO_DB: database
+      # - MONGO_PORT=27017
+    volumes: 
+      - ./data/db:/data/db
+      - ${dir}/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
+    ports:
+      - 27017:27017
+
+  couchdbCredentialStore:
+    image: couchdb:latest
+    restart: always
+    environment:
+      COUCHDB_USER: user
+      COUCHDB_PASSWORD: password
+    volumes: 
+      - ./data/db-credential-store:/opt/couchdb/data 
+      #  Best way to provide configuration to the couchdb image is to provide a custom ini file to CouchDB, preferably stored in the /opt/couchdb/etc/local.d/
+      #  /opt/couchdb/etc/local.ini
+      # By default containers run from this image only log to stdout
+    ports:
+      - "6984:5984"
+
