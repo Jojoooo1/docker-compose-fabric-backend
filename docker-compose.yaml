@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  mongoBackend:
+  mongodb:
     image: mongo:latest
     restart: always
     environment:
