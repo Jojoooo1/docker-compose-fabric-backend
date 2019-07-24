@@ -2,7 +2,7 @@
 dir="$(cd "$(dirname "$0")" && pwd)"
 
 # look for Hyperledger and dev-peers related containers
-dockers=$(docker ps -a | grep "mongo\|couchdbCredentialStore" | awk '{print $1}')
+dockers=$(docker ps -a | grep "fabric_backend" | awk '{print $1}')
 if [[ $dockers ]]; then
   docker rm -f $dockers
 fi

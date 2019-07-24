@@ -3,6 +3,7 @@ version: "3"
 services:
   mongodb:
     image: mongo:latest
+    container_name: fabric_backend_mongodb
     restart: always
     environment:
       MONGO_DATA_DIR: /data/db
@@ -22,6 +23,7 @@ services:
 
   couchdbCredentialStore:
     image: couchdb:latest
+    container_name: fabric_backend_couchdb_credential_store
     restart: always
     environment:
       COUCHDB_USER: user
