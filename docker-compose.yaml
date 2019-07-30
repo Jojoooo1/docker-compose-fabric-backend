@@ -34,5 +34,5 @@ services:
       #  /opt/couchdb/etc/local.ini
       # By default containers run from this image only log to stdout
     ports:
-      - "6984:5984"
+      - "5985:5984"
 
